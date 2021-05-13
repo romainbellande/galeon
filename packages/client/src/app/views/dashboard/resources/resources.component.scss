@@ -1,0 +1,11 @@
+.resources {
+  display: flex;
+
+  > * {
+    margin: 1rem;
+
+    &:first-child {
+      margin-left: 0;
+    }
+  }
+}

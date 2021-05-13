@@ -1,0 +1,12 @@
+.board-card {
+  height: 5rem;
+  cursor: pointer;
+
+  &:hover {
+    background-color: #f3f3f3;
+  }
+
+  .title {
+    font-size: 1rem;
+  }
+}

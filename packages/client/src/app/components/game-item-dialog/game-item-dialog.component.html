@@ -1,0 +1,27 @@
+<h1 mat-dialog-title class="title">{{ 'resources.' + data.name + '.name' | translate }}</h1>
+<div mat-dialog-content>
+  {{ 'resources.' + data.name + '.description.full' | translate }}
+</div>
+<mat-divider class="divider"></mat-divider>
+<div>
+  <div class="level"><div class="label">Required to improve to level</div> <div class="text-accent">{{ data.level + 1 }}</div></div>
+
+  <table mat-table [dataSource]="upgradeCostElements" class="mat-elevation-z8 resources">
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef>name</th>
+      <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+    </ng-container>
+
+    <!-- Name Column -->
+    <ng-container matColumnDef="amount">
+      <th mat-header-cell *matHeaderCellDef>amount</th>
+      <td mat-cell *matCellDef="let element"> {{element.amount}} </td>
+    </ng-container>
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+</div>
+<div mat-dialog-actions class="actions">
+  <button mat-button (click)="onCancel()">cancel</button>
+  <button mat-button (click)="onImprove()" cdkFocusInitial mat-raised-button>improve</button>
+</div>

@@ -1,0 +1,40 @@
+@import 'variables';
+
+.game-item-tile {
+  max-width: 20rem;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  .title {
+    display: flex;
+    justify-content: space-between;
+
+    .text {
+      font-size: 1.25rem;
+      text-transform: capitalize;
+    }
+
+    .level {
+      font-size: 1rem;
+    }
+  }
+
+  .content {
+    margin-top: 1rem;
+
+    .item {
+      display: flex;
+
+      .label {
+        padding-right: 1rem;
+      }
+    }
+  }
+
+  .actions {
+    display: flex;
+    justify-content: flex-end;
+  }
+}

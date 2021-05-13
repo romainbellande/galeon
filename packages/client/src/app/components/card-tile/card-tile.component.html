@@ -1,0 +1,20 @@
+<mat-card class="card-tile" color="secondary">
+  <div class="content">
+    <ng-content></ng-content>
+    <div [ngClass]="{ actions: true, visible: isMenuOpen }">
+      <button
+        class="remove"
+        mat-icon-button
+        aria-label="remove card"
+        [matMenuTriggerFor]="menu"
+        (click)="setIsMenuOpen(true)"
+      >
+        <mat-icon>more_vert</mat-icon>
+      </button>
+      <mat-menu #menu="matMenu" (close)="setIsMenuOpen(false)">
+        <button mat-menu-item>edit</button>
+        <button mat-menu-item>delete</button>
+      </mat-menu>
+    </div>
+  </div>
+</mat-card>

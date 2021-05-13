@@ -1,0 +1,32 @@
+<mat-card class="card-list">
+  <mat-card-title class="title capitalize-first">{{ name }}</mat-card-title>
+  <div class="tiles">
+    <ng-content></ng-content>
+  </div>
+  <div *ngIf="isEditMode; else elseBlock" class="edit">
+    <mat-card class="add-input">
+      <input type="text" placeholder="saisissez un titre pour cette carte..." #addCardInput />
+    </mat-card>
+    <div class="actions">
+      <button class="capitalize-first" mat-raised-button color="primary">
+        ajouter une carte
+      </button>
+      <button
+        class="cancel"
+        mat-icon-button
+        aria-label="cancel card creation"
+        (click)="setEditMode(false)"
+      >
+        <mat-icon>close</mat-icon>
+      </button>
+    </div>
+  </div>
+  <ng-template #elseBlock>
+    <button class="add-card-button" mat-button (click)="setEditMode(true)">
+      <div class="content">
+        <mat-icon aria-label="add icon">add</mat-icon>
+        <div class="capitalize-first">add another card</div>
+      </div>
+    </button>
+  </ng-template>
+</mat-card>

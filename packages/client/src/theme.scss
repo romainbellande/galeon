@@ -1,0 +1,78 @@
+@import '~@angular/material/theming';
+@import './scss/variables';
+// Plus imports for other components in your app.
+
+// Include the common styles for Angular Material. We include this here so that you only
+// have to load a single css file for Angular Material in your app.
+// Be sure that you only ever include this mixin once!
+@include mat-core();
+
+// Define the palettes for your theme using the Material Design palettes available in palette.scss
+// (imported above). For each palette, you can optionally specify a default, lighter, and darker
+// hue. Available color palettes: https://material.io/design/color/
+
+
+// The warn palette is optional (defaults to red).
+$galeon-warn: mat-palette($mat-red);
+
+$galeon-background: mat-palette($mat-blue, 500, 400, 200);
+
+$galeon-surface: mat-palette($mat-blue, 900);
+// Create the theme object. A theme consists of configurations for individual
+// theming systems such as `color` or `typography`.
+$galeon-theme: mat-dark-theme($galeon-primary, $galeon-accent);
+
+$mat-dark-theme-background: (
+  status-bar: black,
+  app-bar:    map-get($galeon-background, 900),
+  background: #171C24,
+  hover:      rgba(white, 0.04), // TODO(kara): check style with Material Design UX
+  card:       #222b36,
+  dialog:     #222b36,
+  disabled-button: rgba(white, 0.12),
+  raised-button: map-get($galeon-secondary, 900),
+  focused-button: $light-focused,
+  selected-button: map-get($galeon-background, 900),
+  selected-disabled-button: #222b36,
+  disabled-button-toggle: black,
+  unselected-chip: map-get($galeon-background, 700),
+  disabled-list-option: black,
+  tooltip: map-get($galeon-background, 700),
+);
+
+// Foreground palette for dark themes.
+$mat-dark-theme-foreground: (
+  base:              white,
+  divider:           $light-dividers,
+  dividers:          $light-dividers,
+  disabled:          $light-disabled-text,
+  disabled-button:   rgba(white, 0.3),
+  disabled-text:     $light-disabled-text,
+  elevation:         black,
+  hint-text:         $light-disabled-text,
+  secondary-text:    $light-secondary-text,
+  icon:              rgba(white, 0.8),
+  icons:             rgba(white, 0.8),
+  text:              rgba(white, 0.8),
+  slider-min:        rgba(white, 0.8),
+  slider-off:        rgba(white, 0.3),
+  slider-off-active: rgba(white, 0.3),
+);
+
+$galeon-theme: map_merge($galeon-theme, (
+  background: $mat-dark-theme-background,
+  foreground: $mat-dark-theme-foreground,
+));
+
+// Include theme styles for core and each component used in your app.
+// Alternatively, you can import and @include the theme mixins for each component
+// that you are using.
+@include angular-material-theme($galeon-theme);
+
+.text-secondary {
+  color: map-get($galeon-secondary, 700),
+}
+
+.text-accent {
+  color: map-get($galeon-accent, 700),
+}

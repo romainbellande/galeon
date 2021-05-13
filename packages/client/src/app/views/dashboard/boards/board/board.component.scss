@@ -1,0 +1,23 @@
+.board {
+  .content {
+    display: flex;
+    flex-direction: row;
+
+    .list {
+      margin: 0.5rem;
+
+      &:first-child {
+        margin-left: 0;
+      }
+
+      .items-wrapper {
+        min-height: 2rem;
+
+        .item {
+          margin: 0.5rem 0;
+        }
+      }
+
+    }
+  }
+}

@@ -1,0 +1,9 @@
+<mat-card class="game-item-tile" color="secondary">
+  <mat-card-title class="title"><div class="text">{{ 'resources.' + name + '.name' | translate }}</div> <div class="level">level: <span class="text-accent">{{ level }}</span></div></mat-card-title>
+  <mat-card-content class="content">
+    {{ 'resources.' + name + '.description.short' | translate }}
+  </mat-card-content>
+  <mat-card-actions class="actions">
+    <button mat-raised-button (click)="openGameItemDialog()">Improve</button>
+  </mat-card-actions>
+</mat-card>

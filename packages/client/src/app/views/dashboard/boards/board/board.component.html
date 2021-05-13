@@ -1,0 +1,19 @@
+<app-page class="board" name="board 1">
+  <div class="content">
+    <app-card-list class="list" [name]="list.name" *ngFor="let list of lists">
+      <div
+        [id]="'list-' + list.id"
+        class="items-wrapper"
+        cdkDropList
+        (cdkDropListDropped)="drop($event)"
+        [cdkDropListData]="list.cards"
+        [cdkDropListConnectedTo]="getConnectedListsWithout(list)"
+      >
+        <div class="item" cdkDrag *ngFor="let item of list.cards">
+          <app-card-tile>{{ item.name }}</app-card-tile>
+        </div>
+      </div>
+    </app-card-list>
+    <div></div>
+  </div>
+</app-page>

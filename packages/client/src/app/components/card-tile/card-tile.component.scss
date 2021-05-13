@@ -1,0 +1,26 @@
+.card-tile {
+  padding: 0.3rem 0.6rem;
+  cursor: pointer;
+
+  &:hover {
+    .content {
+      .actions {
+        visibility: visible;
+      }
+    }
+  }
+
+  .content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    .actions {
+      visibility: hidden;
+
+      &.visible {
+        visibility: visible;
+      }
+    }
+  }
+}
