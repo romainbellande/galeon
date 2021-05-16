@@ -15,6 +15,7 @@
   },
   "devDependencies": {
     "hygen": "^6.0.4",
-    "lerna": "^4.0.0"
+    "lerna": "^4.0.0",
+    "tailwindcss": "npm:@tailwindcss/postcss7-compat"
   }
 }

@@ -1,0 +1,21 @@
+<div class="header">
+  <mat-form-field>
+    <mat-select [(value)]="currentPlanet.id" [disabled]="planets.length === 1">
+      <mat-select-trigger>
+        <div class="text-base">{{ currentPlanet.name }}</div>
+      </mat-select-trigger>
+      <mat-option *ngFor="let planet of planets" [value]="planet.id">
+        {{ planet.name }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+  <div class="resources">
+    <div class="resource" *ngFor="let resource of resources;" [matTooltip]="'current production: +' + calculateProduction(resource)">
+      <div>{{ resource }}:</div>
+      <div *ngIf="resourcesAmountObservable | async as amount; else initial" class="amount text-accent">{{ displayResourceAmount(amount[resource]) }}</div>
+      <ng-template #initial >
+        <div class="amount text-accent">{{ initialResourcesAmount[resource] }}</div>
+      </ng-template>
+    </div>
+  </div>
+</div>

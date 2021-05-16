@@ -8,6 +8,7 @@ interface CostItem {
 type Cost = (level: number) => CostItem[];
 
 export interface BuildingFormulas {
+  isProducing(resource: Resource): boolean;
   production(level: number): number;
   cost: Cost;
   consumption(level: number): number;

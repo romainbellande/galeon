@@ -1,42 +1,26 @@
-import {
-  Entity,
-  PrimaryGeneratedColumn,
-  Column,
-  BeforeInsert,
-  CreateDateColumn,
-  UpdateDateColumn,
-  AfterLoad,
-} from 'typeorm';
+import { Entity, Column, BeforeInsert, AfterLoad } from 'typeorm';
 import {
   IsEmail,
   IsNotEmpty,
   IsString,
-  IsArray,
   Matches,
-  IsOptional,
   Validate,
 } from 'class-validator';
 import { decrypt, encrypt } from '@/utils/crypto';
 import { hash } from '@/utils/hash';
 import { ApiProperty } from '@nestjs/swagger';
 import { IsUnique } from '@/utils/validators/is-unique';
+import { Base } from './base.abstract';
+import { User as IUser } from '@galeon/data';
+import { Exclude } from 'class-transformer';
 
 @Entity()
-export class User {
-  @PrimaryGeneratedColumn('uuid')
-  id: string;
-
+export class User extends Base implements IUser {
   @Column()
   @IsNotEmpty()
   @IsString()
-  @ApiProperty({ example: 'John' })
-  firstName: string;
-
-  @Column()
-  @IsNotEmpty()
-  @IsString()
-  @ApiProperty({ example: 'Doe' })
-  lastName: string;
+  @ApiProperty({ example: 'kikoo9000' })
+  pseudo: string;
 
   @Column({ unique: true })
   @IsNotEmpty()
@@ -45,41 +29,27 @@ export class User {
   @Validate(IsUnique, [{ encrypted: true }])
   email: string;
 
-  @Column('varchar', { array: true })
-  @IsArray()
-  @IsOptional()
-  @ApiProperty()
-  roles: string[] = [];
-
   @Column()
   @IsNotEmpty()
   @Matches(/(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/, {
     message:
       'password must have at least 8 characters, one uppercase letter, one lowercase letter, one number and one special character',
   })
+  @Exclude()
   @ApiProperty()
   password: string;
-
-  @ApiProperty()
-  @CreateDateColumn()
-  createdAt?: string;
-
-  @ApiProperty()
-  @UpdateDateColumn()
-  updatedAt?: string;
 
   @BeforeInsert()
   async beforeInsert() {
     this.password = await hash(this.password);
-    this.firstName = await encrypt(this.firstName);
-    this.lastName = await encrypt(this.lastName);
+    this.pseudo = await encrypt(this.pseudo);
     this.email = await encrypt(this.email);
   }
 
   @AfterLoad()
   async loadEntity() {
-    this.firstName = await decrypt(this.firstName);
-    this.lastName = await decrypt(this.lastName);
+    this.pseudo = await decrypt(this.pseudo);
     this.email = await decrypt(this.email);
+    this.id = this.id.toString();
   }
 }

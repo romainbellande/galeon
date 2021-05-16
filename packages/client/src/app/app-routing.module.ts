@@ -3,6 +3,13 @@ import { Router, RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
   {
+    path: 'portal',
+    loadChildren: () =>
+      import(
+        /* webpackChunkName: "portal" */ './views/portal/portal.module'
+      ).then((m) => m.PortalModule),
+  },
+  {
     path: '',
     loadChildren: () =>
       import(

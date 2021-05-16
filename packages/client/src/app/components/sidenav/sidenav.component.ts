@@ -1,11 +1,10 @@
-import { ChangeDetectorRef, Component, OnDestroy } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit, OnDestroy } from '@angular/core';
 import { MediaMatcher } from '@angular/cdk/layout';
 
 interface SidenavRoute {
   name: string;
   path: string;
 }
-
 @Component({
   selector: 'app-sidenav',
   templateUrl: './sidenav.component.html',
@@ -13,6 +12,7 @@ interface SidenavRoute {
 })
 export class SidenavComponent implements OnDestroy {
   mobileQuery: MediaQueryList;
+
   fillerNav: SidenavRoute[] = [
     {
       name: 'Home',

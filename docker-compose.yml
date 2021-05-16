@@ -1,18 +1,15 @@
 version: '3.2'
 
 services:
-  pg:
-    image: 'postgres:11'
+  mongo:
+    image: 'mongo:4.4.6-bionic'
     environment:
-      POSTGRES_USER: $POSTGRES_USER
-      POSTGRES_PASSWORD: $POSTGRES_PASSWORD
-      POSTGRES_DATABASES: $POSTGRES_DATABASE
-      PGDATA: /var/lib/postgresql/data/pgdata
+      MONGO_INITDB_ROOT_USERNAME: $DB_USER
+      MONGO_INITDB_ROOT_PASSWORD: $DB_PASSWORD
     ports:
-      - 5447:5432
+      - 27612:27017
     volumes:
-      - pg-data:/var/lib/postgresql/data
-      - ./docker/postgres/pg-init-scripts:/docker-entrypoint-initdb.d
+      - database-storage:/data/db
 
   traefik:
     image: "traefik:v2.3"
@@ -36,12 +33,12 @@ services:
 
   server:
     image: node:14-buster
-    user: "node"
+    user: "${UID}:${GID}"
     working_dir: /home/node/packages/server
     command: "yarn start:dev"
     environment:
       NODE_ENV: development
-      DATABASE_URL: "postgres://${POSTGRES_USER}:${POSTGRES_PASSWORD}@pg/${POSTGRES_DATABASE}"
+      DATABASE_URL: "mongodb://${DB_USER}:${DB_PASSWORD}@mongo"
       YARN_VERSION: 1.22.5
       PORT: 9000
       ENVIRONMENT: "development"
@@ -49,37 +46,39 @@ services:
       CRYPTO_IV_BASE64: kj4O+MR8Bnm3j+RNcFNCXw==
       JWT_SECRET: 851fFXbwP&68
     volumes:
-      - ./:/home/node
+      - ./packages/data:/home/node/packages/server/src/.data:ro
+      - ./:/home/node:rw
       - yarn-dir:/usr/local/share/.config/yarn/global
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.server.rule=Host(`api.nang-todo.localhost`)"
+      - "traefik.http.routers.server.rule=Host(`api.galeon.localhost`)"
       - "traefik.http.routers.server.entrypoints=web"
       - 'traefik.http.services.server.loadbalancer.server.port=9000'
     depends_on:
-      - pg
+      - mongo
 
   client:
     image: node:14-buster
-    user: "node"
+    user: "${UID}:${GID}"
     working_dir: /home/node/packages/client
     command: "yarn start"
     environment:
       NODE_ENV: development
       YARN_VERSION: 1.22.5
       ENVIRONMENT: "development"
-      API_URL: api.nang-todo.localhost/api/v1
+      API_URL: api.galeon.localhost/api/v1
     volumes:
-      - ./:/home/node
+      - ./packages/data:/home/node/packages/client/src/.data:ro
+      - ./:/home/node:rw
       - yarn-dir:/usr/local/share/.config/yarn/global
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.client.rule=Host(`nang-todo.localhost`)"
+      - "traefik.http.routers.client.rule=Host(`galeon.localhost`)"
       - "traefik.http.routers.client.entrypoints=web"
       - 'traefik.http.services.client.loadbalancer.server.port=4200'
     depends_on:
       - server
 
 volumes:
-  pg-data:
+  database-storage:
   yarn-dir:

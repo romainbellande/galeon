@@ -14,6 +14,8 @@
     "skipLibCheck": true,
     "paths": {
       "@/*": ["src/*", "dist/*"],
+      "@galeon/data": ["./src/.data/index", "../data/index"],
+      "@galeon/data/*": ["./src/.data/*", "../data/*"]
     }
   },
   "exclude": ["node_modules", "../../node_modules", "dist"],

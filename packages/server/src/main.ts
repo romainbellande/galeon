@@ -1,15 +1,12 @@
 import { NestFactory, Reflector } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
-import { CrudConfigService } from '@nestjsx/crud';
 import {
   ClassSerializerInterceptor,
   Logger,
   ValidationPipe,
 } from '@nestjs/common';
 import { Config } from './config';
-
-CrudConfigService.load(Config.CRUD_GLOBAL_CONFIG);
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);

@@ -1,17 +1,25 @@
+@import 'variables';
+
 .sidenav {
   display: flex;
   flex-direction: column;
 
   &.is-mobile {
-  .toolbar {
+    .toolbar {
       position: fixed;
       /* Make sure the toolbar will stay on top of the content as it scrolls past. */
       z-index: 2;
+
     }
 
     .container {
       flex: 1 0 auto;
     }
+  }
+
+  .header {
+    position: absolute;
+    left: 12.5rem;
   }
 
   .container {

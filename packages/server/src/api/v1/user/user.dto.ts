@@ -13,14 +13,8 @@ export class UserDto {
   @Column()
   @IsNotEmpty()
   @IsString()
-  @ApiProperty({ example: 'John' })
-  firstName: string;
-
-  @Column()
-  @IsNotEmpty()
-  @IsString()
-  @ApiProperty({ example: 'Doe' })
-  lastName: string;
+  @ApiProperty({ example: 'kikoo9000' })
+  pseudo: string;
 
   @Column({ unique: true })
   @IsNotEmpty()

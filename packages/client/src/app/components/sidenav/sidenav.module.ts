@@ -7,8 +7,10 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
 
+
 import { SidenavComponent } from './sidenav.component';
 import { RouterModule } from '@angular/router';
+import { HeaderModule } from '@/components/header/header.module';
 
 @NgModule({
   imports: [
@@ -20,6 +22,7 @@ import { RouterModule } from '@angular/router';
     MatIconModule,
     MatButtonModule,
     MatButtonToggleModule,
+    HeaderModule,
   ],
   exports: [SidenavComponent],
   declarations: [SidenavComponent],

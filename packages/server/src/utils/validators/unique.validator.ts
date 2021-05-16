@@ -23,12 +23,11 @@ export abstract class UniqueValidator implements ValidatorConstraintInterface {
     const { encrypted, entity } = args.constraints[0];
 
     const count = await this.connection
-      .getRepository(entity || args.targetName)
+      .getMongoRepository(entity || args.targetName)
       .count({
-        where: {
-          [args.property]: encrypted ? await encrypt(value) : value,
-        },
+        [args.property]: { $eq: encrypted ? await encrypt(value) : value },
       });
+
     return count <= 0;
   }
 

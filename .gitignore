@@ -4,3 +4,4 @@ node_modules
 .yarn
 .bash_history
 .env
+.data

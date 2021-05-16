@@ -1,5 +1,3 @@
-import { CrudGlobalConfig } from '@nestjsx/crud';
-
 export class Config {
   static readonly DATABASE_URL: string = process.env.DATABASE_URL;
 
@@ -11,18 +9,4 @@ export class Config {
 
   static readonly JWT_SECRET: string = process.env.JWT_SECRET;
 
-  static readonly CRUD_GLOBAL_CONFIG: CrudGlobalConfig = {
-    params: {
-      id: {
-        field: 'id',
-        type: 'uuid',
-        primary: true,
-      },
-    },
-    query: {
-      limit: 30,
-      maxLimit: 30,
-      alwaysPaginate: true,
-    },
-  };
 }

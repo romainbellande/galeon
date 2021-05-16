@@ -2,6 +2,7 @@ import { BuildingFormulas } from './building-formulas.interface';
 import { Resource } from '@/utils/enums/resource.enum';
 
 export const deuteriumSynthetizerFormulas: BuildingFormulas = {
+  isProducing: (resource: Resource) => resource === Resource.DEUTERIUM,
   production: (level) => 10 * level * Math.pow(1.1, level),
   cost: (level) => [
     {

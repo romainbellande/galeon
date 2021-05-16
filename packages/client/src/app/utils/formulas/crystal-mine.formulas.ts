@@ -2,6 +2,7 @@ import { BuildingFormulas } from './building-formulas.interface';
 import { Resource } from '@/utils/enums/resource.enum';
 
 export const crystalMineFormulas: BuildingFormulas = {
+  isProducing: (resource: Resource) => resource === Resource.CRYSTAL,
   production: (level) => 20 * level * Math.pow(1.1, level),
   cost: (level) => [
     {

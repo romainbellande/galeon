@@ -23,7 +23,9 @@
     "paths": {
       "@/*": [
         "src/app/*"
-      ]
+      ],
+      "@galeon/data": ["./src/.data/index",  "../data/index"],
+      "@galeon/data/*": ["./src/.data/*", "../data/*"]
     }
   },
   "angularCompilerOptions": {
